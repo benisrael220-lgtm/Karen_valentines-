@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Patrick ❤️ Karen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  overflow: hidden;
+  text-align: center;
+  color: white;
+}
+
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+h1 {
+  font-size: 3em;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  margin: 10px;
+  transition: transform 0.2s;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: #444;
+  color: white;
+  position: absolute;
+}
+
+.heart {
+  position: absolute;
+  font-size: 2em;
+  animation: float 2s linear forwards;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-200px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro" class="screen">
+  <h1>Hi Karen…</h1>
+  <p>Patrick has something VERY important to ask 😳</p>
+  <button onclick="start()">Continue</button>
+</div>
+
+<div id="question" class="screen hidden">
+  <h1>Karen, will you be my Valentine? ❤️</h1>
+  <div>
+    <button class="yes" onclick="yesClicked()">YES!!!</button>
+    <button class="no" id="noBtn">No</button>
+  </div>
+</div>
+
+<div id="yesScreen" class="screen hidden">
+  <h1>YOU SAID YES!!! 💖💖💖</h1>
+  <p>Patrick promises snacks, laughs, and unlimited hugs 😌</p>
+  <h2>Happy Valentine’s Karen ❤️</h2>
+</div>
+
+<script>
+function start() {
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("question").classList.remove("hidden");
+}
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+function yesClicked() {
+  document.getElementById("question").classList.add("hidden");
+  document.getElementById("yesScreen").classList.remove("hidden");
+  fireworks();
+}
+
+function fireworks() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }, 200);
+}
+</script>
+
+</body>
+</html>
